@@ -35,7 +35,7 @@ print(f"========================\n")
 # Initialize Firebase with proper error handling
 try:
     firebase_admin.get_app()
-    print("✅ Firebase app already initialized")
+    print("[OK] Firebase app already initialized")
 except ValueError:
     # Firebase app doesn't exist, initialize it
     try:
@@ -44,16 +44,16 @@ except ValueError:
             'databaseURL': 'https://zonezero-b4967-default-rtdb.firebaseio.com'
             # ⚠️ REPLACE 'your-project-id' WITH YOUR ACTUAL FIREBASE PROJECT ID
         })
-        print("✅ Firebase initialized successfully")
+        print("[OK] Firebase initialized successfully")
     except FileNotFoundError:
-        print("❌ ERROR: serviceAccountKey.json not found!")
-        print("📍 Current directory:", os.getcwd())
-        print("📍 Files in directory:", os.listdir('.'))
-        print("\n❌ Please make sure serviceAccountKey.json is in your project folder")
+        print("[ERROR] serviceAccountKey.json not found!")
+        print("Current directory:", os.getcwd())
+        print("Files in directory:", os.listdir('.'))
+        print("\n[ERROR] Please make sure serviceAccountKey.json is in your project folder")
         exit(1)
     except Exception as e:
-        print(f"❌ Firebase initialization failed: {str(e)}")
-        print(f"📍 Current directory: {os.getcwd()}")
+        print(f"[ERROR] Firebase initialization failed: {str(e)}")
+        print(f"Current directory: {os.getcwd()}")
         exit(1)
 
 # ========== FLASK INITIALIZATION ==========
@@ -786,12 +786,12 @@ Could not connect to Gemini models. Please check:
 
 if __name__ == "__main__":
     if not os.environ.get("GEMINI_API_KEY"):
-        print("⚠️  WARNING: GEMINI_API_KEY not found!")
-        print("📝 AI research features will not work without an API key.")
-        print("💡 File upload features will still work.")
+        print("[WARNING] GEMINI_API_KEY not found!")
+        print("AI research features will not work without an API key.")
+        print("File upload features will still work.")
         print()
     else:
-        print("✅ GEMINI_API_KEY found")
+        print("[OK] GEMINI_API_KEY found")
     
-    print(f"🚀 Starting Flask server on http://localhost:5000")
+    print(f"Starting Flask server on http://localhost:5000")
     app.run(host="0.0.0.0", port=5000, debug=True)

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,84 +8,209 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
     .user-info {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
 
-.user-name {
-  color: var(--secondary-text);
-  font-size: 0.9rem;
-}
+    .user-name {
+      color: var(--secondary-text);
+      font-size: 0.9rem;
+    }
 
-.logout-btn {
-  padding: 0.5rem 1rem;
-  background: var(--accent-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 0.5rem;
-  color: var(--secondary-text);
-  cursor: pointer;
-  font-size: 0.85rem;
-  transition: all 0.3s ease;
-}
+    .logout-btn {
+      padding: 0.5rem 1rem;
+      background: var(--accent-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem;
+      color: var(--secondary-text);
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+    }
 
-.logout-btn:hover {
-  background: #ef4444;
-  border-color: #ef4444;
-  color: white;
-}
+    .logout-btn:hover {
+      background: #ef4444;
+      border-color: #ef4444;
+      color: white;
+    }
 
-.auth-tabs {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  border-bottom: 1px solid var(--border-color);
-}
+    .auth-tabs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border-color);
+    }
 
-.auth-tab {
-  padding: 0.75rem 1.5rem;
-  background: none;
-  border: none;
-  color: var(--muted-text);
-  cursor: pointer;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  position: relative;
-}
+    .auth-tab {
+      padding: 0.75rem 1.5rem;
+      background: none;
+      border: none;
+      color: var(--muted-text);
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+    }
 
-.auth-tab.active {
-  color: var(--accent-blue);
-}
+    .auth-tab.active {
+      color: var(--accent-blue);
+    }
 
-.auth-tab.active::after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--accent-blue);
-}
+    .auth-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--accent-blue);
+    }
 
-.error-msg {
-  background: #fecaca;
-  color: #991b1b;
-  padding: 0.75rem;
-  border-radius: 0.5rem;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
-}
+    .error-msg {
+      background: #fecaca;
+      color: #991b1b;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
 
-.success-msg {
-  background: #bbf7d0;
-  color: #065f46;
-  padding: 0.75rem;
-  border-radius: 0.5rem;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
-}
+    .success-msg {
+      background: #bbf7d0;
+      color: #065f46;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+
+    /* Login Modal Styles */
+    .login-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .login-modal.show {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-content {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 1.5rem;
+      width: 90%;
+      max-width: 450px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+      animation: slideInUp 0.3s ease;
+    }
+
+    .login-header {
+      padding: 1.5rem 2rem;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .login-header h2 {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .close-login-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .close-login-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: rotate(90deg);
+    }
+
+    .login-body {
+      padding: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--secondary-text);
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      background: var(--secondary-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 0.75rem;
+      color: var(--primary-text);
+      font-size: 1rem;
+      font-family: inherit;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px var(--glow-blue);
+    }
+
+    .form-input::placeholder {
+      color: var(--muted-text);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      border: none;
+      border-radius: 0.75rem;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px var(--glow-blue);
+    }
+
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-   
+
     * {
       margin: 0;
       padding: 0;
@@ -133,9 +259,19 @@
     }
 
     @keyframes float {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      33% { transform: translateY(-20px) rotate(1deg); }
-      66% { transform: translateY(10px) rotate(-1deg); }
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+
+      33% {
+        transform: translateY(-20px) rotate(1deg);
+      }
+
+      66% {
+        transform: translateY(10px) rotate(-1deg);
+      }
     }
 
     header {
@@ -400,8 +536,15 @@
     }
 
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .upload-option {
@@ -447,8 +590,15 @@
     }
 
     @keyframes slideIn {
-      from { opacity: 0; transform: translateX(-20px); }
-      to { opacity: 1; transform: translateX(0); }
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
 
     .results-container {
@@ -462,8 +612,15 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .results-header {
@@ -555,7 +712,9 @@
     }
 
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     .history-modal {
@@ -590,8 +749,15 @@
     }
 
     @keyframes slideInUp {
-      from { opacity: 0; transform: translateY(50px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .history-header {
@@ -989,20 +1155,55 @@
     }
 
     @media (max-width: 768px) {
-      header { padding: 1rem; }
-      .hero h1 { font-size: 2.5rem; }
-      .hero p { font-size: 1.1rem; }
-      main { padding: 2rem 1rem; }
-      .search-container { padding: 1.5rem; }
-      .search-wrapper { flex-direction: column; }
-      .action-buttons { width: 100%; }
-      .search-btn { flex: 1; justify-content: center; }
-      .nav-buttons { gap: 0.5rem; }
-      .nav-btn { padding: 0.5rem 1rem; font-size: 0.8rem; }
-      .nav-btn span { display: none; }
+      header {
+        padding: 1rem;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+      }
+
+      main {
+        padding: 2rem 1rem;
+      }
+
+      .search-container {
+        padding: 1.5rem;
+      }
+
+      .search-wrapper {
+        flex-direction: column;
+      }
+
+      .action-buttons {
+        width: 100%;
+      }
+
+      .search-btn {
+        flex: 1;
+        justify-content: center;
+      }
+
+      .nav-buttons {
+        gap: 0.5rem;
+      }
+
+      .nav-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+      }
+
+      .nav-btn span {
+        display: none;
+      }
     }
 
     @media print {
+
       header,
       .hero,
       .features,
@@ -1060,6 +1261,7 @@
     }
   </style>
 </head>
+
 <body>
   <header>
     <div class="header-content">
@@ -1087,7 +1289,8 @@
   <main>
     <section class="hero">
       <h1>AI Research Assistant</h1>
-      <p>Harness the power of artificial intelligence to conduct comprehensive research with real-time data integration and intelligent analysis.</p>
+      <p>Harness the power of artificial intelligence to conduct comprehensive research with real-time data integration
+        and intelligent analysis.</p>
       <div class="features">
         <div class="feature-badge">
           <i class="fas fa-bolt"></i>
@@ -1110,7 +1313,8 @@
 
     <section class="search-container">
       <div class="search-wrapper">
-        <input type="text" class="search-input" id="searchInput" placeholder="Ask me anything... I'll research it for you with live data and citations">
+        <input type="text" class="search-input" id="searchInput"
+          placeholder="Ask me anything... I'll research it for you with live data and citations">
         <div class="action-buttons">
           <button class="search-btn" onclick="performSearch()" id="searchBtn">
             <i class="fas fa-search"></i>
@@ -1214,7 +1418,8 @@
               Share Link
             </h3>
             <div class="share-link-input-wrapper">
-              <input type="text" class="share-link-input" id="shareLinkInput" readonly value="https://zonezero-ai.com/share/abc123">
+              <input type="text" class="share-link-input" id="shareLinkInput" readonly
+                value="https://zonezero-ai.com/share/abc123">
               <button class="copy-btn" onclick="copyShareLink()">
                 <i class="fas fa-copy"></i>
                 <span id="copyBtnText">Copy</span>
@@ -1242,43 +1447,43 @@
       </div>
     </div>
     <!-- Login Modal -->
-<div class="login-modal" id="loginModal">
-  <div class="login-content">
-    <div class="login-header">
-      <h2>
-        <i class="fas fa-user"></i>
-        <span id="loginFormTitle">Login</span>
-      </h2>
-      <button class="close-login-btn" onclick="closeLogin()">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-    <div class="login-body">
-      <div class="auth-tabs">
-        <button class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
-        <button class="auth-tab" onclick="switchAuthTab('signup')">Sign Up</button>
+    <div class="login-modal" id="loginModal">
+      <div class="login-content">
+        <div class="login-header">
+          <h2>
+            <i class="fas fa-user"></i>
+            <span id="loginFormTitle">Login</span>
+          </h2>
+          <button class="close-login-btn" onclick="closeLogin()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="login-body">
+          <div class="auth-tabs">
+            <button class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
+            <button class="auth-tab" onclick="switchAuthTab('signup')">Sign Up</button>
+          </div>
+
+          <div id="authMessage"></div>
+
+          <form onsubmit="handleLogin(event)">
+            <div class="form-group" id="fullNameGroup" style="display: none;">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-input" id="loginFullName" placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-input" id="loginEmail" placeholder="your@email.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Password</label>
+              <input type="password" class="form-input" id="loginPassword" placeholder="At least 6 characters" required>
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+          </form>
+        </div>
       </div>
-      
-      <div id="authMessage"></div>
-      
-      <form onsubmit="handleLogin(event)">
-        <div class="form-group" id="fullNameGroup" style="display: none;">
-          <label class="form-label">Full Name</label>
-          <input type="text" class="form-input" id="loginFullName" placeholder="Enter your full name">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Email</label>
-          <input type="email" class="form-input" id="loginEmail" placeholder="your@email.com" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Password</label>
-          <input type="password" class="form-input" id="loginPassword" placeholder="At least 6 characters" required>
-        </div>
-        <button type="submit" class="login-btn">Login</button>
-      </form>
     </div>
-  </div>
-</div>
   </main>
 
   <script>
@@ -1290,7 +1495,7 @@
 
     function updateAuthUI() {
       const navButtons = document.querySelector('.nav-buttons');
-      
+
       if (authToken && currentUser.email) {
         navButtons.innerHTML = `
           <button class="nav-btn" onclick="newSearch()">
@@ -1318,7 +1523,7 @@
         if (authToken) {
           headers['Authorization'] = `Bearer ${authToken}`;
         }
-        
+
         const response = await fetch('http://127.0.0.1:5000/api/history', {
           headers: headers
         });
@@ -1339,9 +1544,9 @@
     function displayHistory(data) {
       const historyList = document.getElementById('historyList');
       const totalSearches = document.getElementById('totalSearches');
-      
+
       totalSearches.textContent = data.total || 0;
-      
+
       if (!data.history || data.history.length === 0) {
         historyList.innerHTML = `
           <div class="empty-history">
@@ -1352,16 +1557,16 @@
         `;
         return;
       }
-      
+
       // FIX: Show newest first
       const reversedHistory = [...data.history].reverse();
-      
+
       historyList.innerHTML = reversedHistory.map((item) => {
         // FIX: Use item.id (database ID) instead of array index
         const itemId = item.id;
         const date = new Date(item.timestamp);
         const timeAgo = getTimeAgo(date);
-        
+
         return `
           <div class="history-item" onclick="rerunSearch('${escapeHtml(item.query)}')">
             <div class="history-item-header">
@@ -1392,7 +1597,7 @@
 
     function getTimeAgo(date) {
       const seconds = Math.floor((new Date() - date) / 1000);
-      
+
       const intervals = {
         year: 31536000,
         month: 2592000,
@@ -1401,14 +1606,14 @@
         hour: 3600,
         minute: 60
       };
-      
+
       for (const [unit, secondsInUnit] of Object.entries(intervals)) {
         const interval = Math.floor(seconds / secondsInUnit);
         if (interval >= 1) {
           return `${interval} ${unit}${interval !== 1 ? 's' : ''} ago`;
         }
       }
-      
+
       return 'Just now';
     }
 
@@ -1430,13 +1635,13 @@
       if (!confirm('Delete this search from history?')) {
         return;
       }
-      
+
       try {
         const headers = {};
         if (authToken) {
           headers['Authorization'] = `Bearer ${authToken}`;
         }
-        
+
         const response = await fetch(
           `http://127.0.0.1:5000/api/history/${itemId}`,
           {
@@ -1444,15 +1649,15 @@
             headers: headers
           }
         );
-        
+
         if (!response.ok) {
           const error = await response.json();
           throw new Error(error.message || 'Failed to delete');
         }
-        
+
         showNotification('Item deleted successfully', 'success');
         searchHistory();
-        
+
       } catch (error) {
         console.error('Error deleting item:', error);
         showNotification('Failed to delete item: ' + error.message, 'error');
@@ -1464,26 +1669,26 @@
       if (!confirm('Are you sure you want to clear all search history?')) {
         return;
       }
-      
+
       try {
         const headers = {};
         if (authToken) {
           headers['Authorization'] = `Bearer ${authToken}`;
         }
-        
+
         const response = await fetch('http://127.0.0.1:5000/api/history/clear', {
           method: 'POST',
           headers: headers
         });
-        
+
         if (!response.ok) {
           const error = await response.json();
           throw new Error(error.message || 'Failed to clear history');
         }
-        
+
         showNotification('All history cleared successfully', 'success');
         searchHistory();
-        
+
       } catch (error) {
         console.error('Error clearing history:', error);
         showNotification('Failed to clear history: ' + error.message, 'error');
@@ -1500,7 +1705,7 @@
       const query = document.getElementById('searchInput').value.trim();
       const fileInput = document.getElementById('fileUpload');
       const imageInput = document.getElementById('imageUpload');
-     
+
       if (!query && !fileInput.files[0] && !imageInput.files[0]) {
         showNotification('Please enter a search query or upload a file', 'warning');
         return;
@@ -1536,7 +1741,7 @@
         const result = await response.json();
         displayResults(result);
         showNotification('Research completed successfully!', 'success');
-       
+
       } catch (error) {
         console.error('Search error:', error);
         showNotification('Research failed: ' + error.message, 'error');
@@ -1550,7 +1755,7 @@
       const resultsContainer = document.getElementById('resultsContainer');
       currentResults = result;
       const formattedReport = formatReport(result.report);
-      
+
       resultsContainer.innerHTML = `
         <div class="results-container">
           <div class="results-header">
@@ -1600,10 +1805,10 @@
         <i class="fas fa-times" onclick="removeFile('${type}')" style="cursor: pointer; margin-left: 0.5rem;"></i>
       `;
       indicator.id = `${type}Indicator`;
-     
+
       const existing = document.getElementById(`${type}Indicator`);
       if (existing) existing.remove();
-     
+
       indicators.appendChild(indicator);
     }
 
@@ -1630,21 +1835,21 @@
       `;
       notification.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'times-circle'}"></i> ${message}`;
       document.body.appendChild(notification);
-     
+
       setTimeout(() => {
         notification.style.animation = 'slideInRight 0.3s ease reverse';
         setTimeout(() => notification.remove(), 300);
       }, 3000);
     }
 
-    document.getElementById('searchInput').addEventListener('keypress', function(e) {
+    document.getElementById('searchInput').addEventListener('keypress', function (e) {
       if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
         performSearch();
       }
     });
 
-    document.getElementById('fileUpload').addEventListener('change', function(e) {
+    document.getElementById('fileUpload').addEventListener('change', function (e) {
       if (e.target.files[0]) {
         uploadedFiles.file = e.target.files[0];
         showFileIndicator('file', e.target.files[0].name);
@@ -1652,7 +1857,7 @@
       }
     });
 
-    document.getElementById('imageUpload').addEventListener('change', function(e) {
+    document.getElementById('imageUpload').addEventListener('change', function (e) {
       if (e.target.files[0]) {
         uploadedFiles.image = e.target.files[0];
         showFileIndicator('image', e.target.files[0].name);
@@ -1660,7 +1865,7 @@
       }
     });
 
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
       const menu = document.getElementById('uploadMenu');
       const trigger = document.querySelector('.upload-trigger');
       if (!trigger.contains(e.target)) {
@@ -1678,16 +1883,16 @@
       showNotification('Ready for new search', 'success');
     }
 
-    function shareResults() { 
+    function shareResults() {
       if (!currentResults) {
         showNotification('No results to share yet. Run a search first!', 'warning');
         return;
       }
-      
+
       const shareId = generateShareId();
       const shareUrl = `${window.location.origin}${window.location.pathname}?share=${shareId}`;
       document.getElementById('shareLinkInput').value = shareUrl;
-      
+
       document.getElementById('shareModal').classList.add('show');
     }
 
@@ -1707,7 +1912,7 @@
 
       const shareText = `Check out this AI research: ${currentResults.report.substring(0, 200)}...`;
       const shareUrl = document.getElementById('shareLinkInput').value;
-      
+
       const urls = {
         twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`,
         linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`,
@@ -1733,12 +1938,12 @@
           const btn = document.getElementById('copyBtnText');
           btn.textContent = 'Copied!';
           document.querySelector('.copy-btn').classList.add('copied');
-          
+
           setTimeout(() => {
             btn.textContent = 'Copy';
             document.querySelector('.copy-btn').classList.remove('copied');
           }, 2000);
-          
+
           showNotification('Link copied to clipboard!', 'success');
         });
       } catch (err) {
@@ -1756,10 +1961,10 @@
       const report = currentResults.report;
       const citations = currentResults.citations.join('\n');
       const timestamp = new Date().toLocaleString();
-      
+
       let content, filename, mimeType;
 
-      switch(format) {
+      switch (format) {
         case 'pdf':
           closeShare();
           showNotification('Opening print dialog... Select "Save as PDF"', 'success');
@@ -1807,7 +2012,7 @@ Generated by ZoneZero AI Research Assistant`;
       showNotification(`Exported as ${format.toUpperCase()}!`, 'success');
     }
 
-    function showLogin() { 
+    function showLogin() {
       document.getElementById('loginModal').classList.add('show');
     }
 
@@ -1820,19 +2025,19 @@ Generated by ZoneZero AI Research Assistant`;
       const email = document.getElementById('loginEmail').value.trim();
       const password = document.getElementById('loginPassword').value;
       const tab = document.querySelector('.auth-tab.active').textContent.trim();
-      
+
       const msgDiv = document.getElementById('authMessage');
       msgDiv.innerHTML = '';
-      
+
       if (!email || !password) {
         msgDiv.innerHTML = '<div class="error-msg">Please fill all fields</div>';
         return;
       }
-      
+
       try {
         const endpoint = tab === 'Sign Up' ? '/api/auth/register' : '/api/auth/login';
         const fullName = tab === 'Sign Up' ? document.getElementById('loginFullName')?.value : currentUser.fullName;
-        
+
         const response = await fetch(`http://127.0.0.1:5000${endpoint}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -1842,21 +2047,21 @@ Generated by ZoneZero AI Research Assistant`;
             fullName: fullName || email
           })
         });
-        
+
         const data = await response.json();
-        
+
         if (!response.ok) {
           msgDiv.innerHTML = `<div class="error-msg">${data.error}</div>`;
           return;
         }
-        
+
         authToken = data.token;
         currentUser = data.user;
         localStorage.setItem('authToken', authToken);
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
-        
+
         msgDiv.innerHTML = '<div class="success-msg">Success! Closing...</div>';
-        
+
         setTimeout(() => {
           closeLogin();
           updateAuthUI();
@@ -1864,7 +2069,7 @@ Generated by ZoneZero AI Research Assistant`;
           document.getElementById('loginEmail').value = '';
           document.getElementById('loginPassword').value = '';
         }, 1000);
-        
+
       } catch (error) {
         msgDiv.innerHTML = `<div class="error-msg">Error: ${error.message}</div>`;
       }
@@ -1879,7 +2084,7 @@ Generated by ZoneZero AI Research Assistant`;
       } catch (error) {
         console.error('Logout error:', error);
       }
-      
+
       authToken = null;
       currentUser = {};
       localStorage.removeItem('authToken');
@@ -1891,23 +2096,26 @@ Generated by ZoneZero AI Research Assistant`;
     function switchAuthTab(tab) {
       document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
       event.target.classList.add('active');
-      
-      const fullNameField = document.getElementById('loginFullName');
+
+      const fullNameGroup = document.getElementById('fullNameGroup');
+      const authMessage = document.getElementById('authMessage');
+      authMessage.innerHTML = ''; // Clear any previous error messages
+
       if (tab === 'signup') {
-        fullNameField.style.display = 'block';
+        fullNameGroup.style.display = 'block';
         document.getElementById('loginFormTitle').textContent = 'Create Account';
         document.querySelector('.login-btn').textContent = 'Sign Up';
       } else {
-        fullNameField.style.display = 'none';
+        fullNameGroup.style.display = 'none';
         document.getElementById('loginFormTitle').textContent = 'Login';
         document.querySelector('.login-btn').textContent = 'Login';
       }
     }
 
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
       const historyModal = document.getElementById('historyModal');
       const shareModal = document.getElementById('shareModal');
-      
+
       if (e.target === historyModal) {
         closeHistory();
       }
@@ -1919,4 +2127,5 @@ Generated by ZoneZero AI Research Assistant`;
     updateAuthUI();
   </script>
 </body>
+
 </html>
